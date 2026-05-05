@@ -38,4 +38,19 @@ int sacarElemOrdLista(tLista* pl, void* pd, size_t tam, int (*cmp)(const void*, 
 
 void recorrerLista(tLista* pl, void (*accion)(void*, void*), void* param);
 
+
+/*
+map: recorre la lista y para cada elemento realiza una accion
+filter: recibe una condicion y decide si el elemento se tiene que quedar o no en la lista
+reduce: reduce todo a un solo resultado, ejemplo suma de todo, resta de todo luego de recorrer todos los valores
+sort: Ordenar
+
+
+//Hacer
+//void buscarElemento
+
+
+
+*/
+
 #endif //LISTAENLAZADA_LISTAENLAZADA_H
