@@ -215,3 +215,86 @@ void recorrerLista(tLista* pl, void (*accion)(void*, void*), void* param)
         pl =&(*pl)->sig;
     }
 }
+
+
+void ordenarSelLista(tLista* pl, int (*cmp)(const void*, const void*))
+{
+
+
+    while(*pl)
+    {
+        tLista* men = buscarMenorLista(pl, cmp);
+        if(pl != men)
+            //reinsertar_nodo(pl,men)
+
+        pl = &(*pl)->sig;
+    }
+
+
+
+
+}
+
+/*
+void reinsertar_nodo()
+{
+    tNodo* aux = *men;
+    *men = aux->sig;
+
+    aux->si = *pl;
+    *pl = aux;
+}
+
+
+*/
+tLista* buscarMenorLista(tLista* pl, int (*cmp)(const void*, const void*))
+{
+    tLista* men = pl,     //no puedo manejarlo como puntero a tNodo pq pierdo la referencia del anterior
+
+    if(*pl)
+        pl = &(*pl)->sig;
+
+    while(*pl)
+    {
+        if(cmp((*men)->info, (*pl)->info) > 0)
+            men =pl;
+
+        pl= &(*pl)->sig;
+    }
+
+    return men;
+
+}
+
+/*
+
+void* reduce(tLista* pl, void (*accion)(const void*, void*, void*), void* params, void* result)
+{
+
+    return result;
+}
+
+
+
+void filter(tLista* pl, int (*verif)(const void*, const void*), const void* param)    verif V o F
+{
+    while(*pl)
+    {
+        if(!verif(*pl->info, param)
+        {
+            tNodo* elim = *pl;
+            *pl = elim->sig;
+            free(elim->sig);
+            free(elim);
+        }else{
+            pl = &(*pl)->sig;
+        }
+    }
+}
+
+
+
+
+
+
+*/
