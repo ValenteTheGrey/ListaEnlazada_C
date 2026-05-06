@@ -37,6 +37,8 @@ int sacarElemLista(tLista* pl, void* pd, size_t tam, int (*cmp)(const void*, con
 int sacarElemOrdLista(tLista* pl, void* pd, size_t tam, int (*cmp)(const void*, const void*));
 
 void recorrerLista(tLista* pl, void (*accion)(void*, void*), void* param);
+void ordenarSelLista(tLista* pl, int (*cmp)(const void*, const void*));
+tLista* buscarMenorLista(tLista* pl, int (*cmp)(const void*, const void*));
 
 
 /*

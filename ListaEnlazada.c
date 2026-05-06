@@ -4,6 +4,8 @@
 
 #include "ListaEnlazada.h"
 
+void reinsertar_nodo(tLista* pl, tLista* men);
+
 void crearLista(tLista* pl)
 {
     *pl = NULL;
@@ -69,16 +71,11 @@ int ponerUltimoLista(tLista* pl, const void* pd, size_t tam)
         return LISTA_LLENA;
     }
 
-    while(*pl)
-    {
-        pl = &(*pl)->sig;
-    }
-
     nue->tamInfo = tam;
     memcpy(nue->info, pd, tam);
     nue->sig = *pl;  // esto es NULL al salir del while
 
-    *pl = nue;      //ahora apunta al nuevo nodo
+    *pl = nue;      //ahora apunta al nuevo nodo, pl contiene &(*pl)->sig del penultimo
 
     return TODO_OK;
 }
@@ -101,6 +98,7 @@ int ponerPosLista(tLista* pl, const void* pd, size_t tam, unsigned pos)
 {
     tNodo* nue;
 
+    //La primera posicion es 0 con este criterio
     while(*pl && pos)
     {
         pl = &(*pl)->sig;
@@ -235,29 +233,26 @@ void ordenarSelLista(tLista* pl, int (*cmp)(const void*, const void*))
 
 }
 
-/*
-void reinsertar_nodo()
+void reinsertar_nodo(tLista* pl, tLista* men)
 {
     tNodo* aux = *men;
     *men = aux->sig;
 
-    aux->si = *pl;
+    aux->sig = *pl;
     *pl = aux;
 }
 
-
-*/
 tLista* buscarMenorLista(tLista* pl, int (*cmp)(const void*, const void*))
 {
-    tLista* men = pl,     //no puedo manejarlo como puntero a tNodo pq pierdo la referencia del anterior
+    tLista* men = pl;     //no puedo manejarlo como puntero a tNodo pq pierdo la referencia del anterior
 
-    if(*pl)
-        pl = &(*pl)->sig;
-
+    if(*pl)                   //tNodo*
+        pl = &(*pl)->sig;     //pl es tNodo** entonces *pl es tNodo* y (*pl)-> es **pl o sea tNodo
+                              //tNodo sig es un puntero a otro nodo, es decir es un tNodo*
     while(*pl)
     {
         if(cmp((*men)->info, (*pl)->info) > 0)
-            men =pl;
+            men = pl;
 
         pl= &(*pl)->sig;
     }
